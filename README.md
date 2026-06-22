@@ -39,6 +39,7 @@ Tested assumptions:
 - macOS user account with a normal GUI login session.
 - Internet access for RSS feeds, Python packages, Homebrew, and Ollama model download.
 - Enough disk space for the Ollama model.
+- Enough memory to run the selected local model. The default is an 8B model.
 
 ## Fresh Mac Setup
 
@@ -54,15 +55,17 @@ Finish the system installer window before continuing.
 
 ### 2. Clone the repo
 
-```bash
-git clone git@github.com:chuxuanfu/newsmd.git
-cd newsmd
-```
-
-If SSH is not configured for GitHub yet, follow GitHub's SSH key setup first, or clone with HTTPS:
+Use HTTPS on a fresh Mac because it does not require GitHub SSH key setup:
 
 ```bash
 git clone https://github.com/chuxuanfu/newsmd.git
+cd newsmd
+```
+
+If SSH is already configured:
+
+```bash
+git clone git@github.com:chuxuanfu/newsmd.git
 cd newsmd
 ```
 
@@ -79,9 +82,12 @@ The installer will:
 - Create `.venv/`.
 - Install Python dependencies from `requirements.txt`.
 - Start Ollama if needed.
-- Pull the default model: `qwen3.6:35b`.
+- Pull the default model: `qwen3:8b`.
+- Write the selected local model to `config.local.env`.
 - Create `~/Library/LaunchAgents/com.newsmd.twicedaily.plist`.
 - Load and enable the LaunchAgent.
+
+Homebrew and model download can take a while on a fresh Mac. Homebrew may ask for your macOS password.
 
 If you want a different Ollama model:
 
@@ -90,6 +96,7 @@ NEWSMD_MODEL=qwen3:8b ./scripts/install.sh
 ```
 
 The same model name must be used for later manual runs if you do not want the default.
+The installer writes it into `config.local.env`, which is ignored by git.
 
 ## Manual Test
 
@@ -183,7 +190,7 @@ NEWSMD_SLOT            Output slot, usually 8am or 8pm
 NEWSMD_TOPICS          Space-separated topics, default: headlines tech finance
 NEWSMD_MAX_PER_FEED    Max RSS entries per feed, default: 10
 NEWSMD_TOTAL_LIMIT     Total raw article limit, useful for tests
-NEWSMD_MODEL           Ollama model, default: qwen3.6:35b
+NEWSMD_MODEL           Ollama model, default: qwen3:8b
 NEWSMD_OUTPUT_ROOT     Output root, default: ./news_raw
 NEWSMD_LOG_DIR         Log dir, default: ./logs
 NEWSMD_OLLAMA_URL      Ollama URL, default: http://localhost:11434
@@ -336,6 +343,7 @@ The repository ignores generated and local-only files:
 - `logs/`
 - `run/`
 - `.env*`
+- `config.local.env`
 - local secrets and key files
 - macOS `.DS_Store`
 

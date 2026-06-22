@@ -5,6 +5,11 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+CONFIG_FILE="${PROJECT_ROOT}/config.local.env"
+
+if [ -f "${CONFIG_FILE}" ]; then
+  source "${CONFIG_FILE}"
+fi
 
 FETCHER="${PROJECT_ROOT}/scripts/rss_news_fetcher.py"
 PYTHON="${NEWSMD_PYTHON:-${PROJECT_ROOT}/.venv/bin/python3}"
@@ -12,7 +17,7 @@ NEWS_RAW="${NEWSMD_OUTPUT_ROOT:-${PROJECT_ROOT}/news_raw}"
 LOG_DIR="${NEWSMD_LOG_DIR:-${PROJECT_ROOT}/logs}"
 LOCK_DIR="${PROJECT_ROOT}/run/news_pipeline.lock"
 OLLAMA_URL="${NEWSMD_OLLAMA_URL:-http://localhost:11434}"
-MODEL="${NEWSMD_MODEL:-qwen3.6:35b}"
+MODEL="${NEWSMD_MODEL:-qwen3:8b}"
 TOPICS="${NEWSMD_TOPICS:-headlines tech finance}"
 MAX_PER_FEED="${NEWSMD_MAX_PER_FEED:-10}"
 TOTAL_LIMIT="${NEWSMD_TOTAL_LIMIT:-}"

@@ -19,10 +19,11 @@ newsmd/
 ## Normal Operation
 
 1. `launchd` triggers `scripts/run_news_twice_daily.sh` at 08:00 and 20:00.
-2. The runner checks Python, certificates, lock state, and Ollama.
-3. The runner calls `scripts/rss_news_fetcher.py`.
-4. The fetcher keeps only RSS entries from the last 24 hours.
-5. Full article text is extracted, summarized, translated, and written to `news_raw/`.
+2. The runner loads `config.local.env` if it exists.
+3. The runner checks Python, certificates, lock state, and Ollama.
+4. The runner calls `scripts/rss_news_fetcher.py`.
+5. The fetcher keeps only RSS entries from the last 24 hours.
+6. Full article text is extracted, summarized, translated, and written to `news_raw/`.
 
 ## Validation Checklist
 

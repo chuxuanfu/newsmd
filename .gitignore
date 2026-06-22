@@ -14,6 +14,7 @@ run/
 .env.*
 *.local
 config.local.*
+config.local.env
 secrets.*
 *.pem
 *.key

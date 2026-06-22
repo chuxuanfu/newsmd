@@ -186,7 +186,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = str(PROJECT_ROOT / "news_raw" / f"{datetime.now().strftime('%m%d%Y')}-8pm")
 
 # ---------- Ollama 设置 ----------
-OLLAMA_MODEL    = "qwen3.6:35b"                 # Agent 可改为其他模型
+OLLAMA_MODEL    = "qwen3:8b"                    # Agent 可改为其他模型
 OLLAMA_BASE_URL = "http://localhost:11434"       # Ollama 服务地址
 OLLAMA_TIMEOUT  = 180                            # 单次请求超时(秒)
 ARTICLE_TIMEOUT_BUFFER = 30                      # 单篇文章额外缓冲，避免整批被单个调用拖住
