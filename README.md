@@ -298,7 +298,7 @@ ollama serve
 Pull the model again:
 
 ```bash
-ollama pull qwen3.6:35b
+ollama pull qwen3:8b
 ```
 
 ### Python dependency or certificate errors
